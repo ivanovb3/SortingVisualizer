@@ -1,0 +1,12 @@
+.array-bar{
+    font-size: 0;
+    width: 1px;
+    background-color: blue;
+    display: inline-block;
+    margin: 0 1px;
+}
+.array-container{
+    position: absolute;
+    left: 3%;
+    top: 5%;
+}
