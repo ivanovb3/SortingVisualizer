@@ -5,13 +5,14 @@ import { testAlgos } from '../sortingAlgorithms/Testing';
 
 const SortingVisualizer = () => {
     const [arr, setArr] = useState(generateArray());
+    const [swaps, setSwaps] = useState(0);
 
     useEffect(() => {
-        arrayBar = arr.map((val, index) => { return (<div key={index} className='array-bar' style={{ height: `${val}px` }}>{val}</div>) })
+        // arrayBar = arr.map((val, index) => { return (<div key={index} className='array-bar' style={{ height: `${val}px` }}>{val}</div>) })
     }, [arr])
 
     function generateArray() {
-        const array = []
+        const array = [];
         for (let i = 0; i < 600; i++) {
             array.push(randomNumberInRange(5, 700))
         }
@@ -19,7 +20,8 @@ const SortingVisualizer = () => {
     }
     function bubbleSorting() {
         const sorted = bubbleSort(arr)
-        setArr(sorted);
+        setSwaps(sorted[1])
+        setArr([...sorted[0]]);
     }
     function reset() {
         setArr(generateArray());
@@ -32,12 +34,13 @@ const SortingVisualizer = () => {
 
     return (
         <div>
-            <div className='array-container'>
-                {arrayBar}
-            </div>
             <button onClick={reset}>Try new array</button>
             <button onClick={bubbleSorting}>Bubble sort</button>
             <button onClick={test}>Quick test</button>
+            <h4>Algo made {swaps} swaps</h4>
+            <div className='array-container'>
+                {arrayBar}
+            </div>
         </div>
 
     )
