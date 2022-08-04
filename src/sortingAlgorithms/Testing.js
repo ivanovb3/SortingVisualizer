@@ -7,7 +7,7 @@ export const testAlgos = arr =>{
 
     let bubble = bubbleSort(arr);
 
-    return arraysAreEqual(sorted, bubble[0]);
+    return arraysAreEqual(sorted, bubble[2]);
 }
 
 function arraysAreEqual(arr1, arr2){
