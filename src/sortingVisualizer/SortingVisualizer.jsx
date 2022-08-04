@@ -7,21 +7,36 @@ const SortingVisualizer = () => {
     const [arr, setArr] = useState(generateArray());
     const [swaps, setSwaps] = useState(0);
 
-    useEffect(() => {
-        // arrayBar = arr.map((val, index) => { return (<div key={index} className='array-bar' style={{ height: `${val}px` }}>{val}</div>) })
-    }, [arr])
-
     function generateArray() {
         const array = [];
-        for (let i = 0; i < 600; i++) {
-            array.push(randomNumberInRange(5, 700))
+        for (let i = 0; i < 200; i++) {
+            array.push(randomNumberInRange(5, 300))
         }
         return array;
     }
-    function bubbleSorting() {
-        const sorted = bubbleSort(arr)
+    async function bubbleSorting() {
+        let copy = [...arr]
+        const sorted = bubbleSort(copy, setArr)
         setSwaps(sorted[1])
-        setArr([...sorted[0]]);
+        let animations1 = ([...sorted[0]]);
+        const arrayBars = document.getElementsByClassName('array-bar');
+        for(let i = 0; i < animations1.length; i++){
+
+            const barOneIdx = animations1[i][0];
+            const barTwoIdx = animations1[i][1];
+            const barOneStyle = arrayBars[barOneIdx].style;
+            const barTwoStyle = arrayBars[barTwoIdx].style; 
+
+            let temp = arrayBars[barOneIdx].style.height
+            barOneStyle.backgroundColor = 'red'
+            barTwoStyle.backgroundColor = 'red'
+            arrayBars[barOneIdx].style.height = arrayBars[barTwoIdx].style.height
+            arrayBars[barTwoIdx].style.height = temp
+            await new Promise(r => setTimeout(r, 0.001));
+            barOneStyle.backgroundColor = 'blue'
+            barTwoStyle.backgroundColor = 'blue'
+
+        }
     }
     function reset() {
         setArr(generateArray());
